@@ -5,17 +5,14 @@ import numpy as np
 import math
 import datetime
 
-
 class Rossmann(object):
     def __init__(self):
-        self.home_path = 'C:\\Users\\gabre\\DS IN PROGRESS\\DS_2023\\Ciclo_de_Preparacao\\Data_Science_em_Producao\\'
-        self.competition_distance_scaler = pickle.load(
-            open(self.home_path + 'parameter\\competition_distance_scaler.pkl', 'rb'))
-        self.competition_time_month_scaler = pickle.load(
-            open(self.home_path + 'parameter\\competition_time_month_scaler.pkl', 'rb'))
-        self.promo_time_week_scaler = pickle.load(open(self.home_path + 'parameter\\promo_time_week_scaler.pkl', 'rb'))
-        self.year_scaler = pickle.load(open(self.home_path + 'parameter\\year_scaler.pkl', 'rb'))
-        self.store_type_scaler = pickle.load(open(self.home_path + 'parameter\\store_type_scaler.pkl', 'rb'))
+        self.home_path = ''
+        self.competition_distance_scaler = pickle.load( open( self.home_path + 'parameter/competition_distance_scaler.pkl', 'rb'))
+        self.competition_time_month_scaler = pickle.load( open( self.home_path + 'parameter/competition_time_month_scaler.pkl', 'rb'))
+        self.promo_time_week_scaler = pickle.load( open( self.home_path + 'parameter/promo_time_week_scaler.pkl', 'rb'))
+        self.year_scaler = pickle.load( open( self.home_path + 'parameter/year_scaler.pkl', 'rb'))
+        self.store_type_scaler = pickle.load( open( self.home_path + 'parameter/store_type_scaler.pkl', 'rb'))
 
     def data_cleaning(self, df1):
         ## 1.1. Rename Columns

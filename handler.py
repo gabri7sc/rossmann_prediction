@@ -1,9 +1,11 @@
+import os
 import pickle
 import pandas as pd
 from flask import Flask, request, Response
 from rossmann.Rossmann import Rossmann
 
-# loading model
+# loading model local Test
+
 model = pickle.load(open(
     'C:\\Users\\gabre\\DS IN PROGRESS\\DS_2023\\Ciclo_de_Preparacao\\Data_Science_em_Producao\\parameter\\model_rossmann.pkl',
     'rb'))
@@ -40,10 +42,8 @@ def rossmann_predict():
 
         return df_response
 
-
     else:
         return Reponse('{}', status=200, mimetype='application/json')
 
-
 if __name__ == '__main__':
-    app.run('192.168.1.104')
+    app.run( '192.168.1.104' )
