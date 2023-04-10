@@ -7,7 +7,7 @@ from rossmann.Rossmann import Rossmann
 # loading model local Test
 
 model = pickle.load(open(
-    'C:\\Users\\gabre\\DS IN PROGRESS\\DS_2023\\Ciclo_de_Preparacao\\Data_Science_em_Producao\\parameter\\model_rossmann.pkl',
+    'https://github.com/gabri7sc/rossmann_prediction/blob/main/model/model_rossmann.pkl',
     'rb'))
 
 # initialize API
@@ -46,4 +46,5 @@ def rossmann_predict():
         return Reponse('{}', status=200, mimetype='application/json')
 
 if __name__ == '__main__':
-    app.run( '192.168.1.104' )
+    port = os.environ.get( 'PORT', 5000 )
+    app.run( host='0.0.0.0', port = port)
