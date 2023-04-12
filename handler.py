@@ -6,7 +6,7 @@ from rossmann.Rossmann import Rossmann
 
 # loading model local Test
 
-model = pickle.load(open( '/model/model_rossmann.pkl', 'rb' ) )
+model = pickle.load(open( 'https://github.com/gabri7sc/rossmann_prediction/tree/main/model/model_rossmann.pkl', 'rb' ) )
 
 # initialize API
 app = Flask(__name__)
