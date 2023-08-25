@@ -10,42 +10,38 @@ from flask import Flask, request, Response
 TOKEN = '6513132721:AAGdFLlANPMWtaQEU81YYjhEMBVzlkN0ZhM'
 
 def send_message( chat_id, text ):
-    url = 'https://api.telegram.org/bot{}/'.format( TOKEN ) 
-    url = url + 'sendMessage?chat_id={}'.format( chat_id ) 
-
-    r = requests.post( url, json={'text': text } )
-    print( 'Status Code {}'.format( r.status_code ) )
-
+   url  = f'https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}' # adding TOKEN and chat_id to url
+    r = requests.post(url, json={'text':text}) # concat url and text message
+    print(f'Status Code {r.status_code}')
     return None
 
-def load_dataset( store_id ):
-    # loading test dataset
-    df10 = pd.read_csv( 'test.csv' )
-    df_store_raw = pd.read_csv( 'store.csv' )
+def load_dataset(store_id):
+    # Loading data
+    df10 = pd.read_csv('test.csv')
+    df_store_raw = pd.read_csv('store.csv')
 
-    # merge test dataset + store
-    df_test = pd.merge( df10, df_store_raw, how='left', on='Store' )
+    # Merge test dataset + store
+    df_test = pd.merge(df10, df_store_raw, how='left', on='Store')
 
-    # choose store for prediction
-    df_test = df_test[df_test['Store'] == store_id]
-
-    if not df_test.empty:
-        # remove closed days
+    # Choose store for prediction
+    df_test = df_test[df_test['Store']==store_id]
+    
+    if not df_test.empty:    
+        # Remove closed days
         df_test = df_test[df_test['Open'] != 0]
-        df_test = df_test[df_test['Open'].isnull()]
-        df_test = df_test.drop( 'Id', axis=1 )
+        df_test = df_test[~df_test['Open'].isnull()]
+        df_test = df_test.drop('Id', axis=1 )
 
-        # convert Dataframe to json
-        data = json.dumps( df_test.to_dict( orient='records' ) )
-
+        # Convert to json
+        data = json.dumps(df_test.to_dict(orient='records'))    
     else:
-        data = 'error'
-
+        data = 'error'         
     return data
 
 def predict( data ):
     # API Call
-    url = 'https://teste-rossmann-prediction-api.onrender.com/rossmann/predict'
+    #url = 'https://teste-rossmann-prediction-api.onrender.com/rossmann/predict'
+    url = 'https://rossmann-app.onrender.com/rossmann/predict' 
     header = {'Content-type': 'application/json' }
     data = data
 
