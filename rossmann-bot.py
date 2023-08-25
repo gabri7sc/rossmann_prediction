@@ -10,7 +10,7 @@ from flask import Flask, request, Response
 TOKEN = '6513132721:AAGdFLlANPMWtaQEU81YYjhEMBVzlkN0ZhM'
 
 def send_message( chat_id, text ):
-   url  = f'https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}' # adding TOKEN and chat_id to url
+    url  = f'https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}' # adding TOKEN and chat_id to url
     r = requests.post(url, json={'text':text}) # concat url and text message
     print(f'Status Code {r.status_code}')
     return None
